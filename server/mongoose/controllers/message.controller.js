@@ -24,7 +24,6 @@ const postMessage = (io) => async (ctx) => {
     const savedMessage = await (
       await Message.create({ user: userId, userId, content, timestamp })
     ).populate('user');
-    console.log(savedMessage);
     io.emit('new_message', savedMessage);
     ctx.status = 201;
     ctx.body = savedMessage.toObject();
