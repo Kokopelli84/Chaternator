@@ -1,0 +1,52 @@
+{
+  "name": "codeworks-chat-server-db-exercise",
+  "version": "1.2.7",
+  "description": "A Codeworks exercise to train students",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "codeworks/chat-server-db-exercise"
+  },
+  "scripts": {
+    "precommit": "gulp lint",
+    "start-docker": "docker-compose up -d",
+    "sequelize": "nodemon -q server/sequelize/index.js",
+    "mongoose": "nodemon -q server/mongoose/index.js"
+  },
+  "author": "Codeworks",
+  "license": "UNLICENSED",
+  "private": true,
+  "devDependencies": {
+    "cz-changelog": "^1.0.1",
+    "del": "^6.0.0",
+    "eslint": "^7.28.0",
+    "eslint-plugin-json": "^3.0.0",
+    "gulp": "^4.0.2",
+    "gulp-eslint": "^6.0.0",
+    "gulp-htmllint": "0.0.19",
+    "gulp-load-plugins": "^2.0.7",
+    "gulp-replace": "^1.1.3",
+    "husky": "6.0.0"
+  },
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-changelog"
+    }
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "gulp lint"
+    }
+  },
+  "dependencies": {
+    "@koa/router": "^10.1.1",
+    "koa": "^2.13.4",
+    "koa-bodyparser": "^4.3.0",
+    "koa-static": "^5.0.0",
+    "koa-websocket": "^6.0.0",
+    "mongoose": "^6.0.14",
+    "pg": "^8.7.1",
+    "sequelize": "^6.12.0-alpha.1",
+    "socket.io": "^4.4.0"
+  }
+}

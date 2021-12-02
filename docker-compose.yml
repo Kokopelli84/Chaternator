@@ -1,0 +1,12 @@
+version: '3'
+services:
+  codeworks-postgres:
+    image: postgres
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=codeworks-db
+    ports:
+      - 5432:5432
+    volumes:
+      - .pgdata:/var/lib/postgresql/data
