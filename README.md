@@ -2,6 +2,18 @@
 
 This project is a full stack chat applications for multiple users developed during the junior part of the Codeworks bootcamp. There are two versions for the backend; one running with Sequelize and Postgres and a second with Mongoose and MongoDB. Both will work seamlessly with the same client.
 
+## Tech Stack
+
+### Client
+
+The client was developed with HTML, CSS, JS and some jQuery magic. No SPA frameworks were used. The layout was implemented CSS Grid and Flexbox. CSS variables were used to carry over spacing and color values from a design system and mockup previously created in figma.
+
+### Backend
+
+The server was created with Koa and Nodejs. ODM/ORM of choice were Mongoose and Sequelize.
+
+There is a rudimentary session management that creates users on login and saves the currentUser in local storage. Every chat message is associated with it's author in the DB schema. SocketIO has been used to inform the client of new users entering the chat and update the chatui with incoming messages.
+
 ## Getting started
 
 The following npm commands will start the server:
