@@ -1,6 +1,6 @@
-# Chat server DB
+# Real-time chat with Sequelize and Mongoose
 
-This project is a full stack chat applications for multiple users developed during the junior part of the Codeworks bootcamp. There are two versions for the backend; one running with Sequelize and Postgres and a second with Mongoose and MongoDB. Both will work seamlessly with the same client.
+This project is a full stack chat applications for multiple users developed during the junior part of the Codeworks bootcamp. The backend comes in two flavors; one is running with Sequelize and Postgres and a second with Mongoose and MongoDB. Both will work seamlessly with the same client.
 
 ## Tech Stack
 
