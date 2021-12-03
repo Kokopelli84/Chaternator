@@ -17,10 +17,13 @@ $(() => {
   const onlineUsers = $('#users');
   const usersCounter = $('#users-counter');
   const userHeaderName = $('#user-header-name');
+  const userHeaderUsername = $('#user-header-username h4');
   const loginContainer = $('#login-container');
   const loginForm = $('#login-form');
   const usernameInput = $('#username-input');
   const logout = $('#logout');
+  const toggleBtn = $('#sidebar-toggle');
+  const sidebar = $('#sidebar');
 
   // App variables
   const users = [];
@@ -39,6 +42,7 @@ $(() => {
       getMessagesFromServer();
       renderUser(currentUser);
       userHeaderName.text(currentUser.username[0].toUpperCase());
+      userHeaderUsername.text(currentUser.username);
       socket.emit('user_connected', { user: currentUser });
     }
   }
@@ -61,6 +65,8 @@ $(() => {
       loginContainer.toggleClass('hide');
       chatContainer.toggleClass('hide');
       messages.empty();
+      userHeaderName.text(currentUser.username[0].toUpperCase());
+      userHeaderUsername.text(currentUser.username);
       getMessagesFromServer();
       renderUser(data);
       socket.emit('user_connected', { user: currentUser });
@@ -176,6 +182,19 @@ $(() => {
 
   socket.on('user_joined', (data) => {
     renderUser(data.user);
+  });
+
+  // Sidebar Toggle
+  toggleBtn.on('click', (e) => {
+    if (!sidebar.attr('open')) {
+      sidebar.css('left', '0');
+      !sidebar.attr('open', true);
+      toggleBtn.toggleClass('open');
+    } else {
+      sidebar.css('left', '-100%');
+      !sidebar.attr('open', false);
+      toggleBtn.toggleClass('open');
+    }
   });
 });
 

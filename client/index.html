@@ -45,24 +45,38 @@
       </form>
     </div>
     <div class="chat-container hide" id="chat-container">
-      <nav>
-        <h3 class="section-title" id="users-counter">1 Users Online</h3>
-      </nav>
+      <!-- Sidebar (mobile only) -->
+      <div class="sidebar" id="sidebar">
+        <nav>
+          <!-- <h3 class="section-title" id="users-counter">1 Users Online</h3> -->
+          <div id="user-header-avatar">
+            <div class="avatar">
+              <span id="user-header-name"></span>
+            </div>
+            <div id="user-header-username">
+              <h4></h4>
+              <span class="carret">&#9660;</span>
+              <div class="dropdown-content">
+                <a href="#" class="dropdown-item" id="logout">Logout</a>
+              </div>
+            </div>
+          </div>
+        </nav>
+        <aside>
+          <h4 class="section-title" id="users-counter">1 Users Online</h4>
+          <div class="users-online" id="users"></div>
+        </aside>
+      </div>
+
       <header>
         <img src="./images/logo.png" alt="logo" />
-        <div id="user-header-avatar">
-          <div class="avatar">
-            <span id="user-header-name"></span>
-            <span class="carret">&#9660;</span>
-          </div>
-          <div class="dropdown-content">
-            <a href="#" class="dropdown-item" id="logout">Logout</a>
-          </div>
-        </div>
+        <button id="sidebar-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
       </header>
-      <aside>
-        <div class="users-online" id="users"></div>
-      </aside>
       <main id="messages"></main>
       <footer>
         <form id="form">

@@ -38,7 +38,6 @@ p {
   font-size: 14px;
 }
 
-
 html,
 body {
   font-family: 'Roboto', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
@@ -65,7 +64,7 @@ body {
 }
 
 .login-container form {
-  background:var(--grey);
+  background: var(--grey);
   display: flex;
   flex-direction: column;
   max-width: 350px;
@@ -91,7 +90,7 @@ body {
   text-transform: uppercase;
   font-weight: 400;
   cursor: pointer;
-  transition: all .3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 .login-container button:hover {
@@ -106,23 +105,13 @@ body {
   grid-template-columns: 250px 1fr;
   grid-template-rows: 80px minmax(150px, 1fr) 80px;
   grid-template-areas:
-    'nav   header'
-    'aside main '
-    'aside footer';
+    'sidebar   header'
+    'sidebar   main '
+    'sidebar   footer';
 }
 
 .chat-container.hide {
   display: none;
-}
-
-/* Users online and mobile sidebar toggle */
-nav {
-  grid-area: nav;
-  background: var(--black);
-  border-bottom: 2px solid rgb(35, 35, 35);
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 /* Header */
@@ -131,7 +120,7 @@ header {
   background: var(--dark-grey);
   border-bottom: 2px solid rgb(35, 35, 35);
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
   align-items: center;
   padding: 5px 0;
@@ -139,13 +128,90 @@ header {
 }
 
 header img {
-  height: 100%;
+  height: 80%;
 }
 
+#sidebar-toggle {
+  width: 60px;
+  height: 45px;
+  position: relative;
+  transform: rotate(0deg);
+  transition: 0.5s ease-in-out;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  transform: scale(0.5);
+  display: none;
+}
+
+#sidebar-toggle span {
+  display: block;
+  position: absolute;
+  height: 9px;
+  width: 100%;
+  background: var(--primary);
+  border-radius: 9px;
+  opacity: 1;
+  left: 0;
+  transform: rotate(0deg);
+  transition: 0.25s ease-in-out;
+}
+
+#sidebar-toggle span:nth-child(1) {
+  top: 0px;
+}
+
+#sidebar-toggle span:nth-child(2),
+#sidebar-toggle span:nth-child(3) {
+  top: 18px;
+}
+
+#sidebar-toggle span:nth-child(4) {
+  top: 36px;
+}
+
+#sidebar-toggle.open span:nth-child(1) {
+  top: 18px;
+  width: 0%;
+  left: 50%;
+}
+
+#sidebar-toggle.open span:nth-child(2) {
+  -webkit-transform: rotate(45deg);
+  -moz-transform: rotate(45deg);
+  -o-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+#sidebar-toggle.open span:nth-child(3) {
+  -webkit-transform: rotate(-45deg);
+  -moz-transform: rotate(-45deg);
+  -o-transform: rotate(-45deg);
+  transform: rotate(-45deg);
+}
+
+#sidebar-toggle.open span:nth-child(4) {
+  top: 18px;
+  width: 0%;
+  left: 50%;
+}
 
 #user-header-avatar {
-  position: absolute;
-  right: 20px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+#user-header-avatar #user-header-username {
+  color: white;
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+#user-header-username h4 {
+  margin-right: 5px;
+  font-size: 18px;
 }
 
 #user-header-avatar .avatar {
@@ -158,29 +224,27 @@ header img {
   justify-content: center;
   align-items: center;
   margin-right: 8px;
-  cursor: pointer;
   position: relative;
 }
 
 #user-header-avatar .carret {
   font-size: 8px;
-  position: absolute;
-  right: 4px;
+  display: block;
 }
 
 #user-header-avatar .dropdown-content {
   display: none;
   position: absolute;
+  top: 20px;
   right: 0;
   background-color: #f1f1f1;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 
 #user-header-avatar:hover .dropdown-content {
-  display: block
+  display: block;
 }
-
 
 #user-header-avatar:hover .dropdown-content .dropdown-item {
   color: white;
@@ -189,12 +253,11 @@ header img {
   text-decoration: none;
   display: block;
   cursor: pointer;
-  transition: all .3s ease-in-out;
+  transition: all 0.3s ease-in-out;
 }
 
 #user-header-avatar:hover .dropdown-content .dropdown-item:hover {
   background: var(--light-grey);
-
 }
 
 /* Main Chat Area */
@@ -209,6 +272,7 @@ main {
 
 main .message {
   max-width: 400px;
+  width: fit-content;
   color: white;
   padding: var(--padding);
   display: flex;
@@ -231,6 +295,7 @@ main .message-info .message-date {
 
 main .message-text {
   background: var(--light-grey);
+  width: fit-content;
   margin-top: 5px;
   padding: 8px 10px;
   border-radius: var(--border-radius);
@@ -254,20 +319,47 @@ main .message.me .message-text {
   border: 1px solid var(--primary);
 }
 
-/* User's list aside */
-aside {
-  grid-area: aside;
-  background: var(--black);
-}
-
-h3.section-title {
-  color: white;
-}
-
-aside .users-online {
+/* Sidebar */
+.sidebar {
+  grid-area: sidebar;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  height: 100%;
+  transition: left 0.3s ease-in-out;
+}
+
+/* Users online */
+nav {
+  height: 80px;
+  background: var(--black);
+  border-bottom: 2px solid rgb(35, 35, 35);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+nav img {
+  display: none;
+}
+
+aside h4.section-title {
+  color: white;
+  text-align: center;
+  margin: 10px 0;
+  font-size: 18px;
+  font-weight: 500;
+}
+
+/* User's list aside */
+aside {
+  background: var(--black);
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.users-online {
+  display: flex;
+  flex-direction: column;
   overflow-y: auto;
 }
 
@@ -319,10 +411,43 @@ footer form button {
   padding: 10px 20px;
   text-transform: uppercase;
   margin-left: 10px;
-  transition: background .2s ease-in-out;
+  transition: background 0.2s ease-in-out;
 }
 
 footer form button:hover {
   background: var(--primary-hover);
   cursor: pointer;
+}
+
+/* Media Queries */
+@media (max-width: 600px) {
+  .chat-container {
+    display: grid;
+    height: 100%;
+    grid-template-columns: 1fr;
+    grid-template-rows: 80px minmax(150px, 1fr) 80px;
+    position: relative;
+    grid-template-areas:
+      'header'
+      'main '
+      'footer';
+  }
+
+  nav img {
+    height: 60%;
+    display: block;
+  }
+
+  #sidebar-toggle {
+    display: block;
+    position: absolute;
+    right: 0;
+  }
+
+  .sidebar {
+    position: absolute;
+    width: 280px;
+    left: -100%;
+    z-index: 1;
+  }
 }
